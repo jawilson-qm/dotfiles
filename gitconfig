@@ -54,6 +54,10 @@
 	hg-git-compat = true
 [rerere]
 	enabled = 1
+[includeIf "hasconfig:remote.*.url:git@github.com:Quartermaster-AI/**"]
+	path = .gitconfig-work.inc
+[includeIf "hasconfig:remote.*.url:https://github.com/Quartermaster-AI/**"]
+	path = .gitconfig-work.inc
 [includeIf "gitdir:C:/"]
 	path = .gitconfig-windows.inc
 [branch]

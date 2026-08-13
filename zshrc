@@ -244,6 +244,10 @@ if command -v $PYTHON &> /dev/null; then
     unset python_scripts
 fi
 
+if [ -s $HOME/.opencode/bin ]; then
+    export PATH=$HOME/.opencode/bin:$PATH
+fi
+
 # WSL2 specific setup
 if (( IS_WSL )); then
     if (( !IS_VSCODE_TERMINAL && !IS_AI_AGENT_TERMINAL )); then

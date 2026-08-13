@@ -57,6 +57,20 @@ if command apt-get &> /dev/null; then
     sudo apt-get update -q
 fi
 
+if is_macos; then
+    if ! command -v brew &> /dev/null; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    if command -v brew &> /dev/null; then
+        if [ -x /opt/homebrew/bin/brew ]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        elif [ -x /usr/local/bin/brew ]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+        fi
+    fi
+fi
+
 # Setup ZSH if necessary
 if ! command -v zsh &> /dev/null; then
     if is_windows_native; then
@@ -197,7 +211,7 @@ fi
 
 # fnm
 FNM_DIR="$HOME/.fnm"
-if ! command -v $FNM_DIR/fnm &>/dev/null; then
+if ! command -v fnm &>/dev/null && ! command -v $FNM_DIR/fnm &>/dev/null; then
     if is_windows_native; then
         scoop install fnm
     else

@@ -28,6 +28,9 @@ is_windows_native && IS_WINDOWS_NATIVE=1
 typeset -gi IS_WSL=0
 is_wsl && IS_WSL=1
 
+typeset -gi IS_MACOS=0
+is_macos && IS_MACOS=1
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
@@ -269,6 +272,11 @@ if (( IS_WINDOWS_NATIVE )); then
         precmd_functions+=(keep_current_path)
         typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#load})
     fi
+fi
+
+# macOS specific setup
+if (( IS_MACOS )); then
+    export HOMEBREW_AUTO_UPDATE_SECS=259200 # 3 days
 fi
 
 # VS Code shell integration should be sourced near the end of ~/.zshrc.

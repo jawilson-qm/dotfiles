@@ -248,6 +248,21 @@ fi
 
 # Run zsh if available and configured
 if [[ "$RUNZSH" = "yes" ]] && command -v zsh &> /dev/null && [ -f "$ZSH/oh-my-zsh.sh" ]; then
-    echo "ZSH and Oh My Zsh are configured. Starting ZSH..."
+    echo "ZSH and Oh My Zsh are configured."
+
+    current_shell="${SHELL:-}"
+    current_shell_name="${current_shell##*/}"
+    current_proc="$(ps -o comm= -p $$ 2>/dev/null | tr -d '[:space:]')"
+    parent_proc="$(ps -o comm= -p "$PPID" 2>/dev/null | tr -d '[:space:]')"
+
+    if [[ -n "${ZSH_VERSION:-}" ]] || [[ "$current_shell_name" == "zsh" ]] || [[ "$current_proc" == "zsh" ]] || [[ "$parent_proc" == "zsh" ]]; then
+        echo "Updating the current ZSH session..."
+        if [ -f "${HOME}/.zshrc" ]; then
+            source "${HOME}/.zshrc" 2>/dev/null || true
+        fi
+        return 0 2>/dev/null || exit 0
+    fi
+
+    echo "Starting a new login ZSH session..."
     exec zsh -l
 fi

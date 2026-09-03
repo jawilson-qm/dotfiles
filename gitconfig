@@ -3,6 +3,7 @@
 	email = jeff@jeffalwilson.com
 [core]
 	autocrlf = input
+	editor = git-vscode edit
 [alias]
 	addnw = !sh -c 'git diff -U0 -w --no-color --src-prefix=a/ --dst-prefix=b/ "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
 	br = branch
@@ -36,17 +37,19 @@
 [help]
 	autocorrect = 1
 [merge]
-	tool = vimdiff
+	tool = vscode
 	guitool = vscode
 [mergetool]
 	guiDefault = true
 	keepBackup = false
 [mergetool "vscode"]
-	cmd = code --wait $MERGED
+	cmd = git-vscode merge
+	trustExitCode = true
 [diff]
 	guitool = vscode
+	tool = vscode
 [difftool "vscode"]
-	cmd = code --wait --diff $LOCAL $REMOTE
+	cmd = git-vscode diff
 [push]
 	default = simple
 	autoSetupRemote = true

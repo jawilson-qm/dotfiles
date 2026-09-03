@@ -40,6 +40,13 @@
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "name": "option_up_tapped",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "up_arrow",
                                     "modifiers": {
@@ -49,10 +56,56 @@
                                 },
                                 "to": [
                                     {
+                                        "set_variable": {
+                                            "name": "option_up_tapped",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "key_code": "f",
+                                        "modifiers": ["control", "fn"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "option_up_tapped",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
                                         "key_code": "up_arrow",
                                         "modifiers": ["control", "fn"]
                                     }
                                 ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "option_up_tapped",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "option_up_tapped",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                },
                                 "type": "basic"
                             },
                             {
@@ -75,6 +128,7 @@
                     },
                     {
                         "description": "Swap left_command with left_option",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -96,6 +150,7 @@
                     },
                     {
                         "description": "Swap right_command with right_option",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -117,6 +172,7 @@
                     },
                     {
                         "description": "Ctrl+Tab => Cmd+Tab (Switch application)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -154,6 +210,7 @@
                     },
                     {
                         "description": "Cmd+Tab => Cmd+Alt+0 (Move focus to next window)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -175,10 +232,11 @@
                     },
                     {
                         "description": "Disable option+u from producing accent mark",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "f",
+                                    "key_code": "u",
                                     "modifiers": {
                                         "mandatory": ["left_option"],
                                         "optional": ["any"]
@@ -186,7 +244,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "f",
+                                        "key_code": "u",
                                         "modifiers": []
                                     }
                                 ],
@@ -196,6 +254,7 @@
                     },
                     {
                         "description": "Disable option+` from producing accent mark",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -217,10 +276,11 @@
                     },
                     {
                         "description": "Disable option+e from producing accent mark",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "e",
                                     "modifiers": {
                                         "mandatory": ["left_option"],
                                         "optional": ["any"]
@@ -228,7 +288,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "d",
+                                        "key_code": "e",
                                         "modifiers": ["left_command", "left_option", "left_control"]
                                     }
                                 ],
@@ -306,6 +366,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                                             "^com\\.microsoft\\.rdc\\.macos$",
@@ -315,7 +376,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "n",
+                                    "key_code": "b",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -323,7 +384,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "n",
+                                        "key_code": "b",
                                         "modifiers": ["command"]
                                     }
                                 ],
@@ -375,7 +436,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "i",
+                                    "key_code": "c",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -383,7 +444,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "i",
+                                        "key_code": "c",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -430,7 +491,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "period",
+                                    "key_code": "v",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -438,7 +499,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "period",
+                                        "key_code": "v",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -485,7 +546,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "b",
+                                    "key_code": "x",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -493,7 +554,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "b",
+                                        "key_code": "x",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -511,6 +572,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                                             "^com\\.microsoft\\.rdc\\.macos$",
@@ -520,7 +582,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "g",
+                                    "key_code": "i",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -528,7 +590,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "g",
+                                        "key_code": "i",
                                         "modifiers": ["command"]
                                     }
                                 ],
@@ -580,7 +642,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "y",
+                                    "key_code": "f",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -588,7 +650,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "y",
+                                        "key_code": "f",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -695,7 +757,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "j",
+                                    "key_code": "h",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -703,7 +765,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "y",
+                                        "key_code": "f",
                                         "modifiers": ["left_command", "left_option"]
                                     }
                                 ],
@@ -713,6 +775,7 @@
                     },
                     {
                         "description": "Ctrl+L => Cmd+L (Open url location) (Only in browsers)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -729,7 +792,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "p",
+                                    "key_code": "l",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -737,7 +800,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "p",
+                                        "key_code": "l",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -789,7 +852,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "l",
+                                    "key_code": "n",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -797,7 +860,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "l",
+                                        "key_code": "n",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -806,7 +869,7 @@
                         ]
                     },
                     {
-                        "description": "Ctrl+S => Cmd+S (Save)",
+                        "description": "Ctrl+S => Cmd+S (Save), except Ctrl+Cmd+S",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -849,15 +912,15 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "semicolon",
+                                    "key_code": "s",
                                     "modifiers": {
                                         "mandatory": ["control"],
-                                        "optional": ["any"]
+                                        "optional": ["caps_lock", "shift", "option"]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "semicolon",
+                                        "key_code": "s",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -875,129 +938,10 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^tv\\.parsec\\.www$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "k",
-                                        "modifiers": ["command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Ctrl+W => Cmd+W (Close)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.mac$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                                            "^net\\.sf\\.cord$",
-                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                                            "^com\\.itap-mobile\\.qmote$",
-                                            "^com\\.nulana\\.remotixmac$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                                            "^com\\.teamviewer\\.TeamViewer$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.2X\\.Client\\.Mac$",
-                                            "^com\\.vmware\\.fusion$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.vmware\\.view$",
-                                            "^com\\.parallels\\.desktop$",
-                                            "^com\\.parallels\\.vm$",
-                                            "^com\\.parallels\\.desktop\\.console$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.citrix\\.XenAppViewer$",
-                                            "^com\\.vmware\\.proxyApp\\.",
-                                            "^com\\.parallels\\.winapp\\.",
-                                            "^org\\.macports\\.X11$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
                                             "^com\\.mitchellh\\.ghostty$",
-                                            "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$",
-                                            "^io\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$",
-                                            "^tv\\.parsec\\.www$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "comma",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "comma",
-                                        "modifiers": ["left_command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Ctrl+Y => Cmd+Shift+Y (Redo)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.mac$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                                            "^net\\.sf\\.cord$",
-                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                                            "^com\\.itap-mobile\\.qmote$",
-                                            "^com\\.nulana\\.remotixmac$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                                            "^com\\.teamviewer\\.TeamViewer$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.2X\\.Client\\.Mac$",
-                                            "^com\\.vmware\\.fusion$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.vmware\\.view$",
-                                            "^com\\.parallels\\.desktop$",
-                                            "^com\\.parallels\\.vm$",
-                                            "^com\\.parallels\\.desktop\\.console$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.citrix\\.XenAppViewer$",
-                                            "^com\\.vmware\\.proxyApp\\.",
-                                            "^com\\.parallels\\.winapp\\.",
-                                            "^org\\.macports\\.X11$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^com\\.mitchellh\\.ghostty$",
-                                            "^co\\.zeit\\.hyperterm$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^io\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$",
+                                            "^com\\.microsoft\\.rdc\\.macos$",
                                             "^tv\\.parsec\\.www$"
                                         ],
                                         "type": "frontmost_application_unless"
@@ -1012,7 +956,158 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "slash",
+                                        "key_code": "t",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ctrl+K => Cmd+K (Open a conversation) (Only in Slack)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.tinyspeck\\.slackmacgap$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "k",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ctrl+W => Cmd+W (Close)",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.macos$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                            "^net\\.sf\\.cord$",
+                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                            "^com\\.itap-mobile\\.qmote$",
+                                            "^com\\.nulana\\.remotixmac$",
+                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
+                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
+                                            "^com\\.teamviewer\\.TeamViewer$",
+                                            "^com\\.vmware\\.horizon$",
+                                            "^com\\.2X\\.Client\\.Mac$",
+                                            "^com\\.vmware\\.fusion$",
+                                            "^com\\.vmware\\.horizon$",
+                                            "^com\\.vmware\\.view$",
+                                            "^com\\.parallels\\.desktop$",
+                                            "^com\\.parallels\\.vm$",
+                                            "^com\\.parallels\\.desktop\\.console$",
+                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                                            "^com\\.citrix\\.XenAppViewer$",
+                                            "^com\\.vmware\\.proxyApp\\.",
+                                            "^com\\.parallels\\.winapp\\.",
+                                            "^org\\.macports\\.X11$",
+                                            "^com\\.apple\\.Terminal$",
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$",
+                                            "^tv\\.parsec\\.www$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "w",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ctrl+Y => Cmd+Shift+Y (Redo)",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.macos$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                            "^net\\.sf\\.cord$",
+                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                            "^com\\.itap-mobile\\.qmote$",
+                                            "^com\\.nulana\\.remotixmac$",
+                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
+                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
+                                            "^com\\.teamviewer\\.TeamViewer$",
+                                            "^com\\.vmware\\.horizon$",
+                                            "^com\\.2X\\.Client\\.Mac$",
+                                            "^com\\.vmware\\.fusion$",
+                                            "^com\\.vmware\\.horizon$",
+                                            "^com\\.vmware\\.view$",
+                                            "^com\\.parallels\\.desktop$",
+                                            "^com\\.parallels\\.vm$",
+                                            "^com\\.parallels\\.desktop\\.console$",
+                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                                            "^com\\.citrix\\.XenAppViewer$",
+                                            "^com\\.vmware\\.proxyApp\\.",
+                                            "^com\\.parallels\\.winapp\\.",
+                                            "^org\\.macports\\.X11$",
+                                            "^com\\.apple\\.Terminal$",
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$",
+                                            "^tv\\.parsec\\.www$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "y",
                                         "modifiers": ["left_command", "left_shift"]
                                     }
                                 ],
@@ -1064,7 +1159,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "slash",
+                                    "key_code": "z",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -1072,7 +1167,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "slash",
+                                        "key_code": "z",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -1132,7 +1227,6 @@
                     },
                     {
                         "description": "Alt+F4 => Cmd+Q (Exit application)",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1172,7 +1266,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "x",
+                                        "key_code": "q",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -1190,6 +1284,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1220,6 +1315,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1253,6 +1349,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1289,6 +1386,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1319,6 +1417,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1352,6 +1451,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1380,7 +1480,6 @@
                     },
                     {
                         "description": "Ctrl+(Shift)+Right/left arrow => Alt+(Shift)+Right/left arrow (Move cursor one word with selection and without selection)",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1606,7 +1705,7 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "p",
+                                    "key_code": "l",
                                     "modifiers": {
                                         "mandatory": ["left_option"],
                                         "optional": ["any"]
@@ -1614,7 +1713,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "x",
+                                        "key_code": "q",
                                         "modifiers": ["left_control", "left_command"]
                                     }
                                 ],
@@ -1624,6 +1723,7 @@
                     },
                     {
                         "description": "Ctrl+Shift+Esc => Open Activity Monitor",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1668,6 +1768,7 @@
                     },
                     {
                         "description": "Return => Cmd+o (Open) (Only in Finder)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1684,7 +1785,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "s",
+                                        "key_code": "o",
                                         "modifiers": ["right_command"]
                                     }
                                 ],
@@ -1694,6 +1795,7 @@
                     },
                     {
                         "description": "F2 => Return (Rename) (Only in Finder)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1712,6 +1814,7 @@
                     },
                     {
                         "description": "Ctrl+Left Click => Cmd+Left Click (select multiple items)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -1733,6 +1836,7 @@
                     },
                     {
                         "description": "Ctrl+Home, Ctrl+Shift+Home => Cmd+Up arrow, Cmd+Shift+Up arrow (Move cursor to beginning of file with and without selection)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1741,6 +1845,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1769,6 +1874,7 @@
                     },
                     {
                         "description": "End => Cmd+Right arrow (Move cursor to end of line)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1777,6 +1883,7 @@
                                             "^org\\.macports\\.X11$",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
@@ -1815,7 +1922,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "o",
+                                    "key_code": "r",
                                     "modifiers": {
                                         "mandatory": ["control"],
                                         "optional": ["any"]
@@ -1823,7 +1930,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "o",
+                                        "key_code": "r",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -1833,6 +1940,7 @@
                     },
                     {
                         "description": "Ctrl+Shift+Esc => Open Activity Monitor",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1877,6 +1985,7 @@
                     },
                     {
                         "description": "F2 => Return (Rename) (Only in Finder)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1919,9 +2028,9 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "z",
+                                    "key_code": "semicolon",
                                     "modifiers": {
-                                        "mandatory": ["command"],
+                                        "mandatory": ["option"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -1952,16 +2061,98 @@
                     ]
                 },
                 {
-                    "identifiers": { "is_pointing_device": true },
-                    "ignore": true
-                },
-                {
                     "identifiers": {
                         "is_pointing_device": true,
                         "product_id": 45122,
                         "vendor_id": 1133
                     },
                     "ignore": false
+                },
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f1" },
+                            "to": [{ "key_code": "f1" }]
+                        },
+                        {
+                            "from": { "key_code": "f2" },
+                            "to": [{ "key_code": "f2" }]
+                        },
+                        {
+                            "from": { "key_code": "f3" },
+                            "to": [{ "key_code": "f3" }]
+                        },
+                        {
+                            "from": { "key_code": "f4" },
+                            "to": [{ "key_code": "f4" }]
+                        },
+                        {
+                            "from": { "key_code": "f5" },
+                            "to": [{ "key_code": "f5" }]
+                        },
+                        {
+                            "from": { "key_code": "f6" },
+                            "to": [{ "key_code": "f6" }]
+                        },
+                        {
+                            "from": { "key_code": "f7" },
+                            "to": [{ "key_code": "f7" }]
+                        },
+                        {
+                            "from": { "key_code": "f8" },
+                            "to": [{ "key_code": "f8" }]
+                        },
+                        {
+                            "from": { "key_code": "f9" },
+                            "to": [{ "key_code": "f9" }]
+                        },
+                        {
+                            "from": { "key_code": "f10" },
+                            "to": [{ "key_code": "f10" }]
+                        },
+                        {
+                            "from": { "key_code": "f11" },
+                            "to": [{ "key_code": "f11" }]
+                        },
+                        {
+                            "from": { "key_code": "f12" },
+                            "to": [{ "key_code": "f12" }]
+                        },
+                        {
+                            "from": { "key_code": "f13" },
+                            "to": [{ "key_code": "f13" }]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 3936,
+                        "vendor_id": 13364
+                    }
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 307,
+                        "vendor_id": 3141
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "right_option" },
+                            "to": [{ "key_code": "right_command" }]
+                        },
+                        {
+                            "from": { "key_code": "right_command" },
+                            "to": [{ "key_code": "right_option" }]
+                        }
+                    ]
                 }
             ],
             "name": "Windows",
@@ -1991,6 +2182,67 @@
                         "vendor_id": 3141
                     },
                     "ignore_vendor_events": true
+                },
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f1" },
+                            "to": [{ "key_code": "f1" }]
+                        },
+                        {
+                            "from": { "key_code": "f2" },
+                            "to": [{ "key_code": "f2" }]
+                        },
+                        {
+                            "from": { "key_code": "f3" },
+                            "to": [{ "key_code": "f3" }]
+                        },
+                        {
+                            "from": { "key_code": "f4" },
+                            "to": [{ "key_code": "f4" }]
+                        },
+                        {
+                            "from": { "key_code": "f5" },
+                            "to": [{ "key_code": "f5" }]
+                        },
+                        {
+                            "from": { "key_code": "f6" },
+                            "to": [{ "key_code": "f6" }]
+                        },
+                        {
+                            "from": { "key_code": "f7" },
+                            "to": [{ "key_code": "f7" }]
+                        },
+                        {
+                            "from": { "key_code": "f8" },
+                            "to": [{ "key_code": "f8" }]
+                        },
+                        {
+                            "from": { "key_code": "f9" },
+                            "to": [{ "key_code": "f9" }]
+                        },
+                        {
+                            "from": { "key_code": "f10" },
+                            "to": [{ "key_code": "f10" }]
+                        },
+                        {
+                            "from": { "key_code": "f11" },
+                            "to": [{ "key_code": "f11" }]
+                        },
+                        {
+                            "from": { "key_code": "f12" },
+                            "to": [{ "key_code": "f12" }]
+                        },
+                        {
+                            "from": { "key_code": "f13" },
+                            "to": [{ "key_code": "f13" }]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 3936,
+                        "vendor_id": 13364
+                    }
                 }
             ],
             "name": "Empty",

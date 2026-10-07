@@ -135,7 +135,7 @@ if (( IS_AI_AGENT_TERMINAL )); then
     plugins=()
 else
     plugins=(cp debian pip sudo systemd colorize docker docker-compose node aws zsh-autosuggestions)
-    plugins+=(git gitfast git-extras fnm zsh-better-npm-completion gh deno fnm dvm)
+    plugins+=(git gitfast git-extras fnm zsh-better-npm-completion gh deno dvm)
     plugins+=(mise)
 fi
 
@@ -144,23 +144,59 @@ fi
 # Plugin configs
 zstyle ':omz:plugins:fnm' autostart yes
 
+# MARK: Configure PATH
+#region
+
 # Use coreutils on MacOS
 if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
-if [ -d /usr/local/opt/python/libexec/bin ]; then
-    export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+[[ -d /usr/local/opt/python/libexec/bin ]] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# Android setup
+if [[ "$ENABLE_ANDROID_SETUP" == "true" ]]; then
+    if [ -d /opt/android-ndk ]; then
+        export ANDROID_NDK=/opt/android-ndk
+        export PATH=$ANDROID_NDK:$PATH
+    fi
+    if [ -d ${HOME}/Android/Sdk ]; then
+        export ANDROID_SDK=${HOME}/Android/Sdk
+    elif [ -d ${HOME}/Library/Android/sdk ]; then
+        export ANDROID_SDK=${HOME}/Library/Android/sdk
+    elif [ -d /opt/android-sdk ]; then
+        export ANDROID_SDK=/opt/android-sdk
+    fi
+    if [ -n "$ANDROID_SDK" ] && [ -d "$ANDROID_SDK" ]; then
+        export PATH=$ANDROID_SDK/tools:$PATH
+        export PATH=$ANDROID_SDK/platform-tools:$PATH
+        export PATH=$ANDROID_SDK/cmdline-tools/latest/bin:$PATH
+    fi
 fi
+
+[[ -d /Applications/Postgres.app/Contents/Versions/latest/bin ]] &&
+    export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 # Add user paths before sourcing omzsh so that they are available to plugins and the prompt
 [[ -d $HOME/.bin ]] && export PATH="$HOME/.bin:$PATH"
 [[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
 [[ -d $HOME/scoop/shims ]] && export PATH="$HOME/scoop/shims:$PATH"
 [[ -d $HOME/.fnm ]] && export PATH=$HOME/.fnm:$PATH
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -x "$HOME/.dvm/bin/dvm" ]] && export PATH="$HOME/.dvm/bin:$PATH"
+[[ -d $HOME/.opencode/bin ]] && export PATH=$HOME/.opencode/bin:$PATH
 
-# Oh-my-zsh
+# bun
+if [ -s "$HOME/.bun/_bun" ]; then
+    # add bun to PATH
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+#endregion
+
+# MARK: Oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `omz theme set <theme-name>`.
@@ -183,47 +219,8 @@ else
     source "$dircolors_cache"
 fi
 
-# Android setup
-if [[ "$ENABLE_ANDROID_SETUP" == "true" ]]; then
-    if [ -d /opt/android-ndk ]; then
-        export ANDROID_NDK=/opt/android-ndk
-        export PATH=$ANDROID_NDK:$PATH
-    fi
-    if [ -d ${HOME}/Android/Sdk ]; then
-        export ANDROID_SDK=${HOME}/Android/Sdk
-    elif [ -d ${HOME}/Library/Android/sdk ]; then
-        export ANDROID_SDK=${HOME}/Library/Android/sdk
-    elif [ -d /opt/android-sdk ]; then
-        export ANDROID_SDK=/opt/android-sdk
-    fi
-    if [ -n "$ANDROID_SDK" ] && [ -d "$ANDROID_SDK" ]; then
-        export PATH=$ANDROID_SDK/tools:$PATH
-        export PATH=$ANDROID_SDK/platform-tools:$PATH
-        export PATH=$ANDROID_SDK/cmdline-tools/latest/bin:$PATH
-    fi
-fi
-
-if [ -d /Applications/Postgres.app/Contents/Versions/latest/bin ]; then
-    export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
-fi
-
-if [ -f "$HOME/.cargo/env" ]; then
-    source "$HOME/.cargo/env"
-fi
-
-if [ -f "$HOME/.dvm/bin/dvm" ]; then
-    export PATH="$HOME/.dvm/bin:$PATH"
-fi
-
-# bun
-if [ -s "$HOME/.bun/_bun" ]; then
-    # completions
-    source "$HOME/.bun/_bun"
-
-    # add bun to PATH
-    export BUN_INSTALL="$HOME/.bun"
-    export PATH="$BUN_INSTALL/bin:$PATH"
-fi
+# bun completions
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 # Check for Python and set user scripts directory
 PYTHON=$(get_python_path)
@@ -248,9 +245,10 @@ if command -v $PYTHON &> /dev/null; then
     unset python_scripts
 fi
 
-if [ -s $HOME/.opencode/bin ]; then
-    export PATH=$HOME/.opencode/bin:$PATH
-fi
+[[ -s $HOME/.localstack/localstack_setup.sh ]] && source $HOME/.localstack/localstack_setup.sh
+
+# MARK: Platform-specific Setup
+#region
 
 # WSL2 specific setup
 if (( IS_WSL )); then
@@ -291,6 +289,8 @@ if (( IS_VSCODE_TERMINAL )); then
     fi
     unset vscode_shell_integration_path
 fi
+
+#endregion
 
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof

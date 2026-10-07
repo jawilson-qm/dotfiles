@@ -244,6 +244,11 @@ if ! command -v eza &>/dev/null; then
     fi
 fi
 
+# Hammerspoon (macOS only; config lives in hammerspoon/)
+if is_macos && command -v brew &> /dev/null && ! brew list --cask hammerspoon &> /dev/null; then
+    brew install --cask hammerspoon
+fi
+
 #endregion
 
 # Run zsh if available and configured

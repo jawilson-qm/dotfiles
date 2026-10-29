@@ -20,6 +20,7 @@
 	ldiverge = ![ "$2" ] && HEAD=$2 || HEAD=HEAD && git show $(git merge-base --octopus $1 $HEAD)..$HEAD
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative
 	lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --branches
 	log-standup = !git log --since yesterday --author $(git config user.email) --pretty=short
 	praise = blame
 	pretty-log = log --graph --pretty=format:'%Cred%h%Creset%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev=8 --date=relative

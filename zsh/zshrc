@@ -223,7 +223,12 @@ else
 fi
 
 # Default editor
-export EDITOR='vim'
+if (( $+commands[vim] )); then
+    export EDITOR='vim'
+fi
+if (( $+commands[code] )); then
+    export VISUAL='code --wait'
+fi
 
 # Get colors for tools
 dircolors_cache="${CACHE_HOME}/dircolors-${(%):-%n}.zsh"
